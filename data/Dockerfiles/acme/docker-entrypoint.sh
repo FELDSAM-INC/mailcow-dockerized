@@ -58,11 +58,14 @@ mkdir -p ${ACME_BASE}/acme
 [[ -f ${ACME_BASE}/acme/private/account.key ]] && mv ${ACME_BASE}/acme/private/account.key ${ACME_BASE}/acme/account.pem
 
 reload_configurations(){
+  # Generate password protected key
+  openssl rsa -aes256 -passout pass:${DBPASS} -in ${ACME_BASE}/key.pem -out ${ACME_BASE}/key.secure.pem
   # Reading container IDs
   # Wrapping as array to ensure trimmed content when calling $NGINX etc.
   local NGINX=($(curl --silent --insecure https://dockerapi/containers/json | jq -r '.[] | {name: .Config.Labels["com.docker.compose.service"], id: .Id}' | jq -rc 'select( .name | tostring | contains("nginx-mailcow")) | .id' | tr "\n" " "))
   local DOVECOT=($(curl --silent --insecure https://dockerapi/containers/json | jq -r '.[] | {name: .Config.Labels["com.docker.compose.service"], id: .Id}' | jq -rc 'select( .name | tostring | contains("dovecot-mailcow")) | .id' | tr "\n" " "))
   local POSTFIX=($(curl --silent --insecure https://dockerapi/containers/json | jq -r '.[] | {name: .Config.Labels["com.docker.compose.service"], id: .Id}' | jq -rc 'select( .name | tostring | contains("postfix-mailcow")) | .id' | tr "\n" " "))
+  local PHPFPM=($(curl --silent --insecure https://dockerapi/containers/json | jq -r '.[] | {name: .Config.Labels["com.docker.compose.service"], id: .Id}' | jq -rc 'select( .name | tostring | contains("php-fpm-mailcow")) | .id' | tr "\n" " "))
   # Reloading
   echo "Reloading Nginx..."
   NGINX_RELOAD_RET=$(curl -X POST --insecure https://dockerapi/containers/${NGINX}/exec -d '{"cmd":"reload", "task":"nginx"}' --silent -H 'Content-type: application/json' | jq -r .type)
@@ -73,6 +76,9 @@ reload_configurations(){
   echo "Reloading Postfix..."
   POSTFIX_RELOAD_RET=$(curl -X POST --insecure https://dockerapi/containers/${POSTFIX}/exec -d '{"cmd":"reload", "task":"postfix"}' --silent -H 'Content-type: application/json' | jq -r .type)
   [[ ${POSTFIX_RELOAD_RET} != 'success' ]] && { echo "Could not reload Postfix, restarting container..."; restart_container ${POSTFIX} ; }
+  echo "Reloading PHP-FPM..."
+  PHPFPM_RELOAD_RET=$(curl -X POST --insecure https://dockerapi/containers/${PHPFPM}/exec -d '{"cmd":"reload", "task":"php-fpm"}' --silent -H 'Content-type: application/json' | jq -r .type)
+  [[ ${PHPFPM_RELOAD_RET} != 'success' ]] && { echo "Could not reload PHP-FPM, restarting container..."; restart_container ${PHPFPM} ; }
 }
 
 restart_container(){

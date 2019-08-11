@@ -36,6 +36,8 @@ if (isset($_GET['only_email'])) {
   $description = 'IMAP, CalDAV, CardDAV'; 
 }
 
+ob_start();
+
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 ?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -172,3 +174,36 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
     <integer>1</integer>
   </dict>
 </plist>
+<?php
+
+$profile = ob_get_clean();   
+
+function get_base64($file_name) {
+    $content = file($file_name, FILE_IGNORE_NEW_LINES);
+    $base64_data = "";
+    for ($i=5; $i<sizeof($content); $i++) { // take only the base64 chunk
+        $base64_data .=  $content[$i];
+    }
+    return $base64_data;
+}
+
+function pem2der($base64_data) {
+    $der = base64_decode($base64_data);
+    return $der;
+}
+
+$fp = fopen('/tmp/profile.tmp', 'w');
+fwrite($fp, $profile);
+fclose($fp);
+
+openssl_pkcs7_sign(
+    '/tmp/profile.tmp',
+    '/tmp/profile.signed.tmp',
+    'file:///etc/ssl/mail/cert.pem',
+    array('file:///etc/ssl/mail/key.secure.pem', $database_pass),
+    array(),
+    PKCS7_NOATTR,
+    '/etc/ssl/mail/acme/chain.pem'
+);
+
+echo pem2der(get_base64("/tmp/profile.signed.tmp"));

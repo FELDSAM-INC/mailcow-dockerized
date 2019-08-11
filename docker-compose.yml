@@ -116,6 +116,7 @@ services:
         - ./data/conf/phpfpm/php-conf.d/upload.ini:/usr/local/etc/php/conf.d/upload.ini
         - ./data/conf/phpfpm/php-conf.d/other.ini:/usr/local/etc/php/conf.d/zzz-other.ini
         - ./data/assets/templates:/tpls
+        - ./data/assets/ssl:/etc/ssl/mail/:ro
       environment:
         - LOG_LINES=${LOG_LINES:-9999}
         - TZ=${TZ}
