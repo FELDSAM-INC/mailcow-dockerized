@@ -49,6 +49,7 @@ data/hooks/phpfpm/*
 data/hooks/postfix/*
 data/hooks/rspamd/*
 data/hooks/sogo/*
+!data/hooks/sogo/replace-logo.sh
 data/hooks/unbound/*
 data/web/templates/cache/*
 !data/web/templates/cache/.gitkeep
