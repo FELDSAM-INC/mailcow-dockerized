@@ -508,6 +508,7 @@
         "username": "Používateľské meno"
     },
     "diagnostics": {
+        "allow": "Povoliť",
         "cname_from_a": "Hodnota odvodená od A/AAAA záznamu. Toto je podporené len v prípade ak záznam poukazuje na správny zdroj.",
         "dns_records": "DNS záznamy",
         "dns_records_24hours": "Berte prosím do úvahy, že zmeny v DNS môžu trvať až 24 hodín, aby sa zmeny prejavili na tejto stránke. Pre jednoduchosť DNS konfigurácie môžete použiť údaje uvedené nižšie, prípadne skontrolovať tak správnosť záznamov v DNS.",

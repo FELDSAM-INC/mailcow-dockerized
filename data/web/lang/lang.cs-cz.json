@@ -511,6 +511,7 @@
         "username": "Uživatelské meno"
     },
     "diagnostics": {
+        "allow": "Povolit",
         "cname_from_a": "Hodnota odvozena z A/AAAA záznamu. Lze použít, pokud záznam ukazuje na správný zdroj.",
         "dns_records": "DNS záznamy",
         "dns_records_24hours": "Upozornění: Změnám v systému DNS může trvat až 24 hodin, než se zde správně zobrazí jejich aktuální stav. Můžete zde snadno zjistit, jak nastavit DNS záznamy a zda jsou všechny záznamy správně uloženy.",

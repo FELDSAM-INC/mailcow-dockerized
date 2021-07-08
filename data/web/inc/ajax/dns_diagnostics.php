@@ -69,7 +69,7 @@ if (isset($_SESSION['mailcow_cc_role']) && ($_SESSION['mailcow_cc_role'] == "adm
   }
 
   // Init records array
-  $spf_link = '<a href="http://www.open-spf.org/SPF_Record_Syntax/" target="_blank">SPF Record Syntax</a><br />';
+  $spf_link = 'v=spf1 mx a ~all<br /><a href="http://www.open-spf.org/SPF_Record_Syntax/" target="_blank">SPF Record Syntax</a><br /><small>'.$lang['diagnostics']['allow'].' ip4:'.$ip.'<br />'.$lang['diagnostics']['allow'].' ip6:'.$ip6.'</small>';
   $dmarc_link = '<a href="https://www.kitterman.com/dmarc/assistant.html" target="_blank">DMARC Assistant</a>';
 
   $records = array();
