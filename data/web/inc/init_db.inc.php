@@ -1047,11 +1047,11 @@ function init_db_schema() {
         }
       }
 
-      // Migrate tls_enforce_* options
       if ($table == 'mailbox') {
         $stmt = $pdo->query("SHOW TABLES LIKE 'mailbox'");
         $num_results = count($stmt->fetchAll(PDO::FETCH_ASSOC));
         if ($num_results != 0) {
+	      // Migrate tls_enforce_* options
           $stmt = $pdo->query("SHOW COLUMNS FROM `mailbox` LIKE '%tls_enforce%'"); 
           $num_results = count($stmt->fetchAll(PDO::FETCH_ASSOC));
           if ($num_results != 0) {
@@ -1060,6 +1060,18 @@ function init_db_schema() {
             while ($row = array_shift($tls_options_rows)) {
               $tls_options[$row['username']] = array('tls_enforce_in' => $row['tls_enforce_in'], 'tls_enforce_out' => $row['tls_enforce_out']);
             }
+          }
+          
+          // Migrate cc and sender_cc columns
+          $stmt = $pdo->query("SHOW COLUMNS FROM `mailbox` LIKE '%cc%'");
+          $num_results = count($stmt->fetchAll(PDO::FETCH_ASSOC));
+          if ($num_results != 0) {
+            $pdo->query('INSERT INTO `bcc_maps` (`local_dest`, `bcc_dest`, `domain`, `type`, `active`)
+              SELECT concat(`local_part`, \'@\', `domain`), `cc`, `domain`, \'rcpt\', 1 FROM `mailbox`
+              WHERE `cc` IS NOT NULL');
+            $pdo->query('INSERT INTO `bcc_maps` (`local_dest`, `bcc_dest`, `domain`, `type`, `active`)
+              SELECT concat(`local_part`, \'@\', `domain`), `sender_cc`, `domain`, \'sender\', 1 FROM `mailbox`
+              WHERE `sender_cc` IS NOT NULL');
           }
         }
       }
