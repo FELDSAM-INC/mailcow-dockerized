@@ -8,7 +8,6 @@
 data/assets/ssl-example/*
 data/assets/ssl/*
 data/conf/borgmatic/
-data/conf/clamav/whitelist.ign2
 data/conf/dovecot/acl_anyone
 data/conf/dovecot/dovecot-master.passwd
 data/conf/dovecot/dovecot-master.userdb
