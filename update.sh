@@ -172,7 +172,7 @@ remove_obsolete_nginx_ports() {
           fi
         fi
     fi
-    done        
+    done
 }
 
 detect_docker_compose_command(){
@@ -183,11 +183,11 @@ if ! [[ "${DOCKER_COMPOSE_VERSION}" =~ ^(native|standalone)$ ]]; then
         COMPOSE_COMMAND="docker compose"
         echo -e "\e[31mFound Docker Compose Plugin (native).\e[0m"
         echo -e "\e[31mSetting the DOCKER_COMPOSE_VERSION Variable to native\e[0m"
-        sed -i 's/^DOCKER_COMPOSE_VERSION=.*/DOCKER_COMPOSE_VERSION=native/' $SCRIPT_DIR/mailcow.conf 
+        sed -i 's/^DOCKER_COMPOSE_VERSION=.*/DOCKER_COMPOSE_VERSION=native/' $SCRIPT_DIR/mailcow.conf
         sleep 2
         echo -e "\e[33mNotice: You'll have to update this Compose Version via your Package Manager manually!\e[0m"
       else
-        echo -e "\e[31mCannot find Docker Compose with a Version Higher than 2.X.X.\e[0m" 
+        echo -e "\e[31mCannot find Docker Compose with a Version Higher than 2.X.X.\e[0m"
         echo -e "\e[31mPlease update/install it manually regarding to this doc site: https://docs.mailcow.email/i_u_m/i_u_m_install/\e[0m"
         exit 1
       fi
@@ -202,54 +202,54 @@ if ! [[ "${DOCKER_COMPOSE_VERSION}" =~ ^(native|standalone)$ ]]; then
         sleep 2
         echo -e "\e[33mNotice: For an automatic update of docker-compose please use the update_compose.sh scripts located at the helper-scripts folder.\e[0m"
       else
-        echo -e "\e[31mCannot find Docker Compose with a Version Higher than 2.X.X.\e[0m" 
+        echo -e "\e[31mCannot find Docker Compose with a Version Higher than 2.X.X.\e[0m"
         echo -e "\e[31mPlease update/install regarding to this doc site: https://docs.mailcow.email/i_u_m/i_u_m_install/\e[0m"
         exit 1
       fi
     fi
 
   else
-    echo -e "\e[31mCannot find Docker Compose.\e[0m" 
+    echo -e "\e[31mCannot find Docker Compose.\e[0m"
     echo -e "\e[31mPlease install it regarding to this doc site: https://docs.mailcow.email/i_u_m/i_u_m_install/\e[0m"
     exit 1
   fi
 
 elif [ "${DOCKER_COMPOSE_VERSION}" == "native" ]; then
   COMPOSE_COMMAND="docker compose"
-  # Check if Native Compose works and has not been deleted  
+  # Check if Native Compose works and has not been deleted
   if ! $COMPOSE_COMMAND > /dev/null 2>&1; then
     # IF it not exists/work anymore try the other command
     COMPOSE_COMMAND="docker-compose"
     if ! $COMPOSE_COMMAND > /dev/null 2>&1 || ! $COMPOSE_COMMAND --version | grep "^2." > /dev/null 2>&1; then
       # IF it cannot find Standalone in > 2.X, then script stops
-      echo -e "\e[31mCannot find Docker Compose or the Version is lower then 2.X.X.\e[0m" 
+      echo -e "\e[31mCannot find Docker Compose or the Version is lower then 2.X.X.\e[0m"
       echo -e "\e[31mPlease install it regarding to this doc site: https://docs.mailcow.email/i_u_m/i_u_m_install/\e[0m"
       exit 1
     fi
       # If it finds the standalone Plugin it will use this instead and change the mailcow.conf Variable accordingly
       echo -e "\e[31mFound different Docker Compose Version then declared in mailcow.conf!\e[0m"
       echo -e "\e[31mSetting the DOCKER_COMPOSE_VERSION Variable from native to standalone\e[0m"
-      sed -i 's/^DOCKER_COMPOSE_VERSION=.*/DOCKER_COMPOSE_VERSION=standalone/' $SCRIPT_DIR/mailcow.conf 
+      sed -i 's/^DOCKER_COMPOSE_VERSION=.*/DOCKER_COMPOSE_VERSION=standalone/' $SCRIPT_DIR/mailcow.conf
       sleep 2
   fi
 
 
 elif [ "${DOCKER_COMPOSE_VERSION}" == "standalone" ]; then
   COMPOSE_COMMAND="docker-compose"
-  # Check if Standalone Compose works and has not been deleted  
+  # Check if Standalone Compose works and has not been deleted
   if ! $COMPOSE_COMMAND > /dev/null 2>&1 && ! $COMPOSE_COMMAND --version > /dev/null 2>&1 | grep "^2." > /dev/null 2>&1; then
     # IF it not exists/work anymore try the other command
     COMPOSE_COMMAND="docker compose"
     if ! $COMPOSE_COMMAND > /dev/null 2>&1; then
       # IF it cannot find Native in > 2.X, then script stops
-      echo -e "\e[31mCannot find Docker Compose.\e[0m" 
+      echo -e "\e[31mCannot find Docker Compose.\e[0m"
       echo -e "\e[31mPlease install it regarding to this doc site: https://docs.mailcow.email/i_u_m/i_u_m_install/\e[0m"
       exit 1
     fi
       # If it finds the native Plugin it will use this instead and change the mailcow.conf Variable accordingly
       echo -e "\e[31mFound different Docker Compose Version then declared in mailcow.conf!\e[0m"
       echo -e "\e[31mSetting the DOCKER_COMPOSE_VERSION Variable from standalone to native\e[0m"
-      sed -i 's/^DOCKER_COMPOSE_VERSION=.*/DOCKER_COMPOSE_VERSION=native/' $SCRIPT_DIR/mailcow.conf 
+      sed -i 's/^DOCKER_COMPOSE_VERSION=.*/DOCKER_COMPOSE_VERSION=native/' $SCRIPT_DIR/mailcow.conf
       sleep 2
   fi
 fi
@@ -329,10 +329,10 @@ unset COMPOSE_COMMAND
 unset DOCKER_COMPOSE_VERSION
 
 for bin in curl docker git awk sha1sum grep cut; do
-  if [[ -z $(command -v ${bin}) ]]; then 
-  echo "Cannot find ${bin}, exiting..." 
+  if [[ -z $(command -v ${bin}) ]]; then
+  echo "Cannot find ${bin}, exiting..."
   exit 1;
-  fi  
+  fi
 done
 
 export LC_ALL=C
@@ -343,14 +343,14 @@ while (($#)); do
   case "${1}" in
     --check|-c)
       echo "Checking remote code for updates..."
-      LATEST_REV=$(git ls-remote --exit-code --refs --quiet https://github.com/mailcow/mailcow-dockerized ${BRANCH} | cut -f1)
+      LATEST_REV=$(git ls-remote --exit-code --refs --quiet git@gitlab.feldhost.cz:feldhost/mailhosting.git ${BRANCH} | cut -f1)
       if [ $? -ne 0 ]; then
         echo "A problem occurred while trying to fetch the latest revision from github."
         exit 99
       fi
       if [[ -z $(git log HEAD --pretty=format:"%H" | grep "${LATEST_REV}") ]]; then
-        echo -e "Updated code is available.\nThe changes can be found here: https://github.com/mailcow/mailcow-dockerized/commits/master"
-        git log --date=short --pretty=format:"%ad - %s" $(git rev-parse --short HEAD)..origin/master
+        echo -e "Updated code is available.\nThe changes can be found here: https://gitlab.feldhost.cz/feldhost/mailhosting/-/tree/${BRANCH}"
+        git log --date=short --pretty=format:"%ad - %s" $(git rev-parse --short HEAD)..origin/${BRANCH}
         exit 0
       else
         echo "No updates available."
@@ -359,6 +359,9 @@ while (($#)); do
     ;;
     --ours)
       MERGE_STRATEGY=ours
+    ;;
+    --rebase)
+      USE_REBASE=y
     ;;
     --skip-start)
       SKIP_START=y
@@ -397,6 +400,7 @@ while (($#)); do
 
   -c|--check           -   Check for updates and exit (exit codes => 0: update available, 3: no updates)
   --ours               -   Use merge strategy option "ours" to solve conflicts in favor of non-mailcow code (local changes over remote changes), not recommended!
+  --rebase             -   Use rebase instead of merge
   --gc                 -   Run garbage collector to delete old image tags
   --nightly            -   Switch your mailcow updates to the unstable (nightly) branch. FOR TESTING PURPOSES ONLY!!!!
   --prefetch           -   Only prefetch new images and exit (useful to prepare updates)
@@ -736,7 +740,7 @@ for option in ${CONFIG_ARRAY[@]}; do
   fi
 done
 
-if [[( ${SKIP_PING_CHECK} == "y")]]; then
+if [[ ( ${SKIP_PING_CHECK} == "y")]]; then
 echo -e "\e[32mSkipping Ping Check...\e[0m"
 
 else
@@ -779,7 +783,7 @@ elif [ $NEW_BRANCH == "master" ] && [ $CURRENT_BRANCH != "master" ]; then
   sleep 1
   echo -e "\e[31mWARNING: Please see on GitHub or ask in the communitys if a switch to master is stable or not.
   In some rear cases a Update back to master can destroy your mailcow configuration in case of Database Upgrades etc.
-  Normally a upgrade back to master should be safe during each full release. 
+  Normally a upgrade back to master should be safe during each full release.
   Check GitHub for Database Changes and Update only if there similar to the full release!\e[0m"
   read -r -p "Are you sure you that want to continue upgrading to the stable (master) branch? [y/N] " response
   if [[ ! "${response}" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
@@ -838,6 +842,13 @@ if [ ! $DEV ]; then
   fi
 fi
 
+if [[ -f mailcow.conf ]]; then
+  source mailcow.conf
+else
+  echo -e "\e[31mNo mailcow.conf - is mailcow installed?\e[0m"
+  exit 1
+fi
+
 if [ ! $FORCE ]; then
   read -r -p "Are you sure you want to update mailcow: dockerized? All containers will be stopped. [y/N] " response
   if [[ ! "${response}" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
@@ -892,26 +903,53 @@ done
 # Silently fixing remote url from andryyy to mailcow
 # git remote set-url origin https://github.com/mailcow/mailcow-dockerized
 
-DEFAULT_REPO=https://github.com/mailcow/mailcow-dockerized
+DEFAULT_REPO=git@gitlab.feldhost.cz:feldhost/mailhosting.git
 CURRENT_REPO=$(git remote get-url origin)
-if [ "$CURRENT_REPO" != "$DEFAULT_REPO" ]; then 
+if [ "$CURRENT_REPO" != "$DEFAULT_REPO" ]; then
   echo "The Repository currently used is not the default Mailcow Repository."
   echo "Currently Repository: $CURRENT_REPO"
   echo "Default Repository:   $DEFAULT_REPO"
   read -r -p "Should it be changed back to default? [y/N] " repo_response
   if [[ "$repo_response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+  git add -u
     git remote set-url origin $DEFAULT_REPO
   fi
 fi
 
-echo -e "\e[32mCommitting current status...\e[0m"
-[[ -z "$(git config user.name)" ]] && git config user.name moo
-[[ -z "$(git config user.email)" ]] && git config user.email moo@cow.moo
-[[ ! -z $(git ls-files data/conf/rspamd/override.d/worker-controller-password.inc) ]] && git rm data/conf/rspamd/override.d/worker-controller-password.inc
-git add -u
-git commit -am "Before update on ${DATE}" > /dev/null
+if [[ ${USE_REBASE} != "y" ]]; then
+  echo -e "\e[32mCommitting current status...\e[0m"
+  [[ -z "$(git config user.name)" ]] && git config user.name moo
+  [[ -z "$(git config user.email)" ]] && git config user.email moo@cow.moo
+  [[ ! -z $(git ls-files data/conf/rspamd/override.d/worker-controller-password.inc) ]] && git rm data/conf/rspamd/override.d/worker-controller-password.inc
+  git add -u
+  git commit -am "Before update on ${DATE}" > /dev/null
+fi
 echo -e "\e[32mFetching updated code from remote...\e[0m"
 git fetch origin #${BRANCH}
+
+if [[ ${USE_REBASE} == "y" ]]; then
+  echo -e "\e[32mPulling new changes with --rebase...\e[0m"
+  # reset update.sh back before pull with rebase
+  git reset HEAD update.sh
+  git checkout update.sh
+  git checkout data/conf/postfix/main.cf
+  git checkout docker-compose.yml
+  git fetch --tags
+  git pull --rebase
+
+  # remove ipv6 container
+  if grep -qi "ip6tables\":true" /etc/docker/daemon.json; then
+    sed -i '/ipv6nat-mailcow:$/,/^$/d' docker-compose.yml
+  fi
+
+  REBASE_RETURN=$?
+  if [[ ${REBASE_RETURN} != 0 ]]; then
+    echo -e "\e[31m\nOh no, something went wrong. Please check the error message above.\e[0m"
+    echo
+    echo "Run docker-compose up -d to restart your stack without updates or try again after fixing the mentioned errors."
+    exit 1
+  fi
+else
 echo -e "\e[32mMerging local with remote code (recursive, strategy: \"${MERGE_STRATEGY:-theirs}\", options: \"patience\"...\e[0m"
 git config merge.defaultToUpstream true
 git merge -X${MERGE_STRATEGY:-theirs} -Xpatience -m "After update on ${DATE}"
@@ -933,6 +971,7 @@ elif [[ ${MERGE_RETURN} != 0 ]]; then
   echo "Run $COMPOSE_COMMAND up -d to restart your stack without updates or try again after fixing the mentioned errors."
   exit 1
 fi
+fi
 
 echo -e "\e[32mFetching new images, if any...\e[0m"
 sleep 2
@@ -940,7 +979,7 @@ $COMPOSE_COMMAND pull
 
 # Fix missing SSL, does not overwrite existing files
 [[ ! -d data/assets/ssl ]] && mkdir -p data/assets/ssl
-cp -n -d data/assets/ssl-example/*.pem data/assets/ssl/
+cp -n -d data/assets/ssl-default/*.pem data/assets/ssl/
 
 echo -e "Checking IPv6 settings... "
 if grep -q 'SYSCTL_IPV6_DISABLED=1' mailcow.conf; then
@@ -976,9 +1015,9 @@ if [ -f "data/conf/rspamd/local.d/metrics.conf" ]; then
 fi
 
 # Set app_info.inc.php
-if [ ${BRANCH} == "master" ]; then
+if [[ ${BRANCH} == "master" ]] || [[ ${BRANCH} == feldhost* ]]; then
   mailcow_git_version=$(git describe --tags `git rev-list --tags --max-count=1`)
-elif [ ${BRANCH} == "nightly" ]; then
+elif [[ ${BRANCH} == "nightly" ]]; then
   mailcow_git_version=$(git rev-parse --short $(git rev-parse @{upstream}))
   mailcow_last_git_version=""
 else
@@ -1015,6 +1054,9 @@ else
   echo '?>' >> data/web/inc/app_info.inc.php
   echo -e "\e[33mCannot determine current git repository version...\e[0m"
 fi
+
+# Set DOCKER_COMPOSE_VERSION
+sed -i 's/^DOCKER_COMPOSE_VERSION=$/DOCKER_COMPOSE_VERSION='$DOCKER_COMPOSE_VERSION'/g' mailcow.conf
 
 if [[ ${SKIP_START} == "y" ]]; then
   echo -e "\e[33mNot starting mailcow, please run \"$COMPOSE_COMMAND up -d --remove-orphans\" to start mailcow.\e[0m"
