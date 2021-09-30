@@ -41,6 +41,52 @@ The project is managed and maintained by The Infrastructure Company GmbH.
 
 Originated from @andryyy (André)
 
+## Docker daemon config
+
+`# nano /etc/docker/daemon.json`
+
+```
+{
+    "storage-driver": "overlay2",
+    "live-restore": true
+}
+```
+
+```
+systemctl enable docker
+systemctl start docker
+```
+
+## Required sysctl params
+
+`# nano /etc/sysctl.conf`
+
+```
+net.ipv4.ip_forward=1
+net.ipv6.conf.all.forwarding = 1
+vm.overcommit_memory=1
+net.core.somaxconn=2048
+net.ipv4.tcp_max_syn_backlog=512
+vm.swappiness = 0
+fs.inotify.max_user_watches = 4096
+fs.inotify.max_user_instances = 4096
+vm.max_map_count=262144
+net.bridge.bridge-nf-call-iptables=1
+net.bridge.bridge-nf-call-ip6tables=1
+```
+
+`# sysctl -p`
+
+## How to initialize
+
+```
+systemctl stop firewalld postfix
+systemctl disable firewalld postfix
+./generate_config.sh
+docker-compose pull
+docker-compose up -d
+```
+
 ## FeldHost upgrade procedure
 
 1. `git fetch origin/feldhost-new`
