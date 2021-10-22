@@ -82,6 +82,7 @@ function dkim($_action, $_data = null, $privkey = false) {
               continue;
             }
           }
+          dkim_update_in_dns($domain, $dkim_selector, $pubKey);
           $_SESSION['return'][] = array(
             'type' => 'success',
             'log' => array(__FUNCTION__, $_action, $_data),
@@ -314,6 +315,7 @@ function dkim($_action, $_data = null, $privkey = false) {
           );
           continue;
         }
+        dkim_update_in_dns($domain, $selector, null);
         $_SESSION['return'][] = array(
           'type' => 'success',
           'log' => array(__FUNCTION__, $_action, $_data),
@@ -322,4 +324,61 @@ function dkim($_action, $_data = null, $privkey = false) {
       }
     break;
   }
+}
+
+function dkim_update_in_dns($domain, $selector, $key){
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/lib/ispconfig.php';
+    $dns_name  = $selector.'._domainkey';
+    $dns_value = 'v=DKIM1;k=rsa;t=s;s=email;p='.$key;
+    
+    try {
+	    $ispconfig = new Ispconfig();
+	
+	    $zone = $ispconfig->dns_zone_get(array('origin' => $domain.'.'));
+	
+	    if(!$zone[0]['id']) return;
+	
+	    $records = $ispconfig->dns_rr_get_all_by_zone($zone[0]['id']);
+	
+	    $rr_id = null;
+	    foreach($records as $record){
+	        if($record['type'] == 'TXT' && $record['name'] == $dns_name){
+	            $rr_id = $record['id'];
+	            break;
+	        }
+	    }
+	
+	    // delete
+	    if($key === null && $rr_id){
+	        $ispconfig->dns_txt_delete($rr_id);
+	        return;
+	    }
+	
+	    // calculate client id
+	    $client_id = $zone[0]['sys_groupid'] - 1;
+	
+	    // prepare record
+	    $params = array(
+	        'server_id' => $ispconfig->get_config('dns_server_id'),
+	        'zone'      => $zone[0]['id'],
+	        'name'      => $dns_name,
+	        'type'      => 'TXT',
+	        'data'      => $dns_value,
+	        'ttl'       => 7200,
+	        'active'    => 'Y',
+	        'stamp'     => date('Y-m-d H:i:s'),
+	    );
+	
+	    // record found
+	    if($rr_id){
+	        $ispconfig->dns_txt_update($client_id, $rr_id, $params);
+	        return;
+	    }
+	
+	    // not found, add new
+	    $ispconfig->dns_txt_add($client_id, $params);
+    }
+    catch(\Exception $e) {
+	    // silently fails
+    }
 }
