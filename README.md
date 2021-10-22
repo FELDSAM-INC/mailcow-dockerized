@@ -40,3 +40,9 @@ mailcow is a registered word mark of The Infrastructure Company GmbH, Parkstr. 4
 The project is managed and maintained by The Infrastructure Company GmbH.
 
 Originated from @andryyy (André)
+
+## FeldHost upgrade procedure
+
+1. `git fetch origin/feldhost-new`
+2. `git checkout origin/feldhost-new update.sh`
+3. `./update.sh --branch feldhost-new`
