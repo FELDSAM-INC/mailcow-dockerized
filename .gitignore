@@ -25,6 +25,7 @@ data/conf/nextcloud-*.bak
 data/conf/nginx/*.active
 data/conf/nginx/*.bak
 data/conf/nginx/*.conf
+!data/conf/nginx/redirect.conf
 data/conf/nginx/*.custom
 data/conf/phpfpm/sogo-sso/sogo-sso.pass
 data/conf/portainer/
