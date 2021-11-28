@@ -89,6 +89,6 @@ docker-compose up -d
 
 ## FeldHost upgrade procedure
 
-1. `git fetch origin/feldhost-new`
-2. `git checkout origin/feldhost-new update.sh`
-3. `./update.sh --branch feldhost-new`
+1. `git fetch origin`
+2. `git checkout feldhost-new`
+3. `./update.sh --rebase`
