@@ -43,12 +43,21 @@ Originated from @andryyy (André)
 
 ## Docker daemon config
 
+```
+yum install docker-engine docker-compose git
+docker-storage-config -s overlay2 -d /dev/sdb
+```
+
 `# nano /etc/docker/daemon.json`
 
 ```
 {
     "storage-driver": "overlay2",
-    "live-restore": true
+    "live-restore": true,
+    "log-driver": "gelf",
+    "log-opts": {
+      "gelf-address": "udp://log.feldcloud.net:12201"
+    }
 }
 ```
 
@@ -80,8 +89,12 @@ net.bridge.bridge-nf-call-ip6tables=1
 ## How to initialize
 
 ```
+yum remove NetworkManager NetworkManager-libnm NetworkManager-config-server
 systemctl stop firewalld postfix
 systemctl disable firewalld postfix
+cd /var/lib/docker
+git clone git@gitlab.feldhost.cz:feldhost/mailhosting.git
+cd /root && ln -s /var/lib/docker/mailhosting mailhosting && cd mailhosting
 ./generate_config.sh
 docker-compose pull
 docker-compose up -d
