@@ -364,7 +364,7 @@ paths:
                     - log:
                         - dkim
                         - add
-                        - dkim_selector: dkim
+                        - dkim_selector: feldhost
                           domains: hanspeterlol.de
                           key_size: "2048"
                       msg:
@@ -398,7 +398,7 @@ paths:
           application/json:
             schema:
               example:
-                dkim_selector: dkim
+                dkim_selector: feldhost
                 domains: feldhost.tld
                 key_size: "2048"
               properties:
@@ -3937,7 +3937,7 @@ paths:
               examples:
                 response:
                   value:
-                    dkim_selector: dkim
+                    dkim_selector: feldhost
                     dkim_txt: >-
                       v=DKIM1;k=rsa;t=s;s=email;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA21tUSjyasQy/hJmVjPnlRGfzx6TPhYj8mXY9DVOzSAE64Gddw/GnE/GcCR6WXNT23u9q4zPnz1IPoNt5kFOps8vg/iNqrcH++494noaZuYyFPPFnebkfryO4EvEyxC/c66qts+gnOUml+M8uv5WObBJld2gG12jLwFM0263J/N6J8LuUsaXOB2uCIfx8Nf4zjuJ6Ieez2uyHNK5dXjDLfKA4mTr+EEK6W6e34M4KN1liWM6r9Oy5S1FlLrD42VpURxxBZtBiEtaJPEKSQuk6GQz8ihu7W20Yr53tyCdaORu8dhxXVUWVf+GjuuMEdAmQCjYkarXdYCrt56Psw703kwIDAQAB
                     length: "2048"

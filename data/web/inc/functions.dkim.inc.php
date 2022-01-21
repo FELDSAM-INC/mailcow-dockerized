@@ -6,7 +6,7 @@ function dkim($_action, $_data = null, $privkey = false) {
   switch ($_action) {
     case 'add':
       $key_length = intval($_data['key_size']);
-      $dkim_selector = (isset($_data['dkim_selector'])) ? $_data['dkim_selector'] : 'dkim';
+      $dkim_selector = (isset($_data['dkim_selector'])) ? $_data['dkim_selector'] : 'feldhost';
       $domains = array_map('trim', preg_split( "/( |,|;|\n)/", $_data['domains']));
       $domains = array_filter($domains);
       foreach ($domains as $domain) {
