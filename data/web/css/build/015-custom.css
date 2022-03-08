@@ -1,0 +1,15 @@
+.panel-login legend {
+	line-height: 32px;
+}
+
+.panel-login .mailcow-logo {
+	margin: 20px 0 30px;
+}
+
+.footer .version {
+  margin: 0 auto;
+}
+
+.navbar .navbar-brand img {
+  height: 35px;
+}

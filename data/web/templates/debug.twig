@@ -19,7 +19,7 @@
       <li role="presentation"><span class="dropdown-header fs-6">{{ lang.debug.external_logs }}</span></li>
       <li role="presentation"><button class="dropdown-item" data-bs-target="#tab-rspamd-history" aria-selected="false" aria-controls="tab-rspamd-history" role="tab" data-bs-toggle="tab">Rspamd</button></li>
       <li role="presentation"><span class="dropdown-header fs-6">{{ lang.debug.static_logs }}</span></li>
-      <li role="presentation"><button class="dropdown-item" data-bs-target="#tab-ui" aria-selected="false" aria-controls="tab-ui" role="tab" data-bs-toggle="tab">Mailcow UI</button></li>
+      <li role="presentation"><button class="dropdown-item" data-bs-target="#tab-ui" aria-selected="false" aria-controls="tab-ui" role="tab" data-bs-toggle="tab">FeldHost™ Mailhosting UI</button></li>
       <li role="presentation"><button class="dropdown-item" data-bs-target="#tab-sasl" aria-selected="false" aria-controls="tab-sasl" role="tab" data-bs-toggle="tab">SASL</button></li>
     </ul>
   </li>
@@ -37,8 +37,8 @@
           <div class="card-body">
             <div class="row">
               <div class="col-sm-12 col-md-4 d-flex flex-column">
-                <img class="main-logo img-responsive my-auto m-auto" alt="mailcow-logo" style="max-width: 85%; max-height: 85%;" src="{{ logo|default('/img/cow_mailcow.svg') }}">
-                <img class="main-logo-dark img-responsive my-auto m-auto" alt="mailcow-logo-dark" style="max-width: 85%; max-height: 85%;" src="{{ logo_dark|default('/img/cow_mailcow.svg') }}">
+                <img class="main-logo img-responsive my-auto m-auto" alt="feldhost-logo" style="max-width: 85%; max-height: 85%;" src="{{ logo|default('/img/feldhost_logo.png') }}">
+                <img class="main-logo-dark img-responsive my-auto m-auto" alt="feldhost-logo-dark" style="max-width: 85%; max-height: 85%;" src="{{ logo_dark|default('/img/feldhost_logo_white.png') }}">
               </div>
               <div class="col-sm-12 col-md-8">
                 <div class="table-responsive" style="margin-top: 10px;">
@@ -77,7 +77,7 @@
                         <td>Version</td>
                         <td class="text-break">
                           <div class="fw-bolder">
-                            <p ><a href="#" id="mailcow_version">{{ mailcow_info.version_tag }}</a></p>
+                            <p>{{ mailcow_info.version_tag }}</p>
                             <p id="mailcow_update"></p>
                           </div>
                         </td>
@@ -122,41 +122,6 @@
                 <h3>{{ lang.debug.memory|upper}}</h3>
                 <h5><span id="host_memory_total">-</span> @ <span id="host_memory_usage"></span></h5>
                 <canvas id="host_mem_chart" width="400" height="200"></canvas>
-              </div>
-
-              <div class="col-sm-12">
-                <legend class="mt-4">
-                  {{ lang.admin.guid_and_license }}
-                </legend>
-                <hr />
-                <div id="license">
-                  <form class="form-horizontal" autocapitalize="none" autocorrect="off" role="form" method="post">
-                    <div class="row">
-                      <label class="control-label col-sm-3" for="guid">{{ lang.admin.guid }}:</label>
-                      <div class="col-sm-9">
-                        <div class="input-group">
-                          <span class="input-group-text">
-                            <i class="bi bi-suit-heart{% if gal.valid == true %}-fill text-danger{% endif %}"></i>
-                          </span>
-                          <input type="text" id="guid" class="form-control" value="{{ license_guid }}" readonly>
-                        </div>
-                        <p class="text-muted">
-                          {{ lang.admin.customer_id }}: {{ gal.c|default('?')|raw }} -
-                          {{ lang.admin.service_id }}: {{ gal.s|default('?')|raw }} -
-                          {{ lang.admin.sal_level }}: {{ gal.m|default('?')|raw }}
-                        </p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="offset-sm-3 col-sm-9">
-                        <p class="text-muted">{{ lang.admin.license_info|raw }}</p>
-                        <div class="btn-group">
-                          <button class="btn btn-sm d-block d-sm-inline btn-success" name="license_validate_now" type="submit" href="#">{{ lang.admin.validate_license_now }}</button>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
               </div>
             </div>
           </div>
@@ -370,7 +335,7 @@
         <div class="debug-log-info">{{ lang.debug.log_info|format(log_lines+1)|raw }}</div>
         <div class="card">
           <div class="card-header d-flex align-items-center fs-5">
-            <span class="mt-2 ms-2">Mailcow UI</span>
+            <span class="mt-2 ms-2">FeldHost™ Mailhosting UI</span>
             <div class="btn-group ms-auto">
               <button class="btn btn-sm btn-secondary refresh_table" data-draw="draw_ui_logs" data-table="ui_logs">{{ lang.admin.refresh }}</button>
             </div>

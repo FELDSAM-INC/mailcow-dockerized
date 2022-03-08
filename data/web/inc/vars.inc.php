@@ -117,7 +117,7 @@ $UI_THEME = "lumen";
 // Show DKIM private keys - false by default
 $SHOW_DKIM_PRIV_KEYS = false;
 
-// mailcow Apps - buttons on login screen
+// Apps - buttons on login screen
 $MAILCOW_APPS = array(
   array(
     'name' => 'Webmail',
@@ -138,7 +138,7 @@ $LOG_PAGINATION_SIZE = 50;
 $SESSION_LIFETIME = 10800;
 
 // Label for OTP devices
-$OTP_LABEL = "mailcow UI";
+$OTP_LABEL = "FeldHost™ Mailhosting UI";
 
 // How long to wait (in s) for cURL Docker requests
 $DOCKER_TIMEOUT = 60;

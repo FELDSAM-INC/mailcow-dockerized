@@ -31,7 +31,7 @@
         "add_domain_only": "Agregar dominio solamente",
         "add_domain_restart": "Agregar dominio y reiniciar SOGo",
         "alias_address": "Dirección(es) alias:",
-        "alias_address_info": "<small>Dirección(es) de correo completa(s) ó @dominio.com, para atrapar todos los mensajes para un dominio (separado por coma). <b>Dominios que existan en mailcow solamente</b>.</small>",
+        "alias_address_info": "<small>Dirección(es) de correo completa(s) ó @dominio.com, para atrapar todos los mensajes para un dominio (separado por coma). <b>Dominios que existan en FeldHost™ Mailhosting solamente</b>.</small>",
         "alias_domain": "Dominio alias",
         "alias_domain_info": "<small>Nombres de dominio válidos solamente (separado por coma).</small>",
         "automap": "Intentar enlazar carpetas (\"Sent items\", \"Sent\" => \"Sent\" etc.)",
@@ -120,7 +120,7 @@
         "api_key": "Clave del API",
         "app_links": "Enlaces de las apps",
         "app_name": "Nombre de la app",
-        "apps_name": "Nombre \"mailcow Apps\"",
+        "apps_name": "Nombre \"Apps\"",
         "arrival_time": "Tiempo de llegada (hora del servidor)",
         "ban_list_info": "Lista de IPs bloqueadas: <b>red (tiempo de prohibición restante) - [acciones]</b>.<br />Las IPs en cola para ser desbloqueadas se eliminarán de la lista de bloqueos en unos pocos segundos.<br />Las etiquetas rojas indican bloqueos permanentes mediante la inclusión en la lista negra.",
         "change_logo": "Cambiar logo",
@@ -162,7 +162,7 @@
         "filter_table": "Filtrar tabla",
         "forwarding_hosts": "Hosts de reenvío",
         "forwarding_hosts_add_hint": "Se puede especificar direcciones IPv4 / IPv6, redes en notación CIDR, nombres de host (que se resolverán en direcciones IP) o dominios (que se resolverán en direcciones IP consultando registros SPF o, en su defecto, registros MX)",
-        "forwarding_hosts_hint": "Los mensajes entrantes son aceptados incondicionalmente de cualquiera de los hosts enumerados aquí. Estos hosts no se comprueban con listas DNSBL o se someten a greylisting. El spam recibido de ellos nunca se rechaza, pero opcionalmente se puede archivar en la carpeta de correo no deseado. El uso más común para esto es especificar los servidores de correo en los que ha configurado una regla que reenvía los correos electrónicos entrantes al servidor mailcow.",
+        "forwarding_hosts_hint": "Los mensajes entrantes son aceptados incondicionalmente de cualquiera de los hosts enumerados aquí. Estos hosts no se comprueban con listas DNSBL o se someten a greylisting. El spam recibido de ellos nunca se rechaza, pero opcionalmente se puede archivar en la carpeta de correo no deseado. El uso más común para esto es especificar los servidores de correo en los que ha configurado una regla que reenvía los correos electrónicos entrantes al servidor.",
         "from": "De",
         "generate": "Generar",
         "help_text": "Campo de texto debajo del formulario de inicio de sesión (se permite HTML)",
@@ -177,7 +177,7 @@
         "link": "Enlace",
         "loading": "Espera por favor...",
         "logo_info": "La imagen se escalará a una altura de 40 px para la barra de navegación superior y un máx. de ancho de 250 px para la página de inicio. Un gráfico escalable es muy recomendable.",
-        "main_name": "Nombre \"mailcow UI\"",
+        "main_name": "Nombre \"FeldHost™ Mailhosting\"",
         "merged_vars_hint": "Las filas grises fueron incorporadas de <code>vars.(local.)inc.php</code> y no son modificables.",
         "message_size": "Tamaño del mensaje",
         "nexthop": "Siguiente destino",
@@ -208,7 +208,7 @@
         "quota_notifications_vars": "{{percent}} equivale a la cuota actual del usuario<br>{{username}} es el buzón del usuario",
         "r_active": "Restricciones activas",
         "r_inactive": "Restricciones inactivas",
-        "r_info": "Los elementos desactivados en la lista de restricciones activas no son reconocidas como restricciones válidas por mailcow y no se pueden mover. <br>Se puede agregar nuevos elementos en <code>inc/vars.local.inc.php</code> para poder activarlos.",
+        "r_info": "Los elementos desactivados en la lista de restricciones activas no son reconocidas como restricciones válidas por FeldHost™ Mailhosting y no se pueden mover. <br>Se puede agregar nuevos elementos en <code>inc/vars.local.inc.php</code> para poder activarlos.",
         "recipients": "Destinatarios",
         "refresh": "Actualizar",
         "regen_api_key": "Regenerar clave API",
@@ -238,7 +238,7 @@
         "subject": "Asunto",
         "sys_mails": "Mails del sistema",
         "text": "Texto",
-        "title_name": "\"mailcow UI\" (título de la página)",
+        "title_name": "\"FeldHost™ Mailhosting\" (título de la página)",
         "to_top": "Regresar al principio",
         "transport_maps": "Mapa de rutas de transporte",
         "transports_hint": "→ Una entrada del ruta de transporte <b> anula </b> la regla de host de reenvío dependiente del remitente</b>.<br>\r\n→ La configuración de la política saliente de TLS por usuario se ignora y solo puede ser aplicada por las entradas del mapa de políticas TLS.<br>\r\n→ El servicio de transporte es siempre <em>smtp:</em><br>\r\n→ Las direcciones que coincidan con \"/localhost$/\" siempre se transportarán a través de \"local:\", por lo tanto, un destino \"*\" no se aplicará a esas direcciones.<br>\r\n→ Para determinar las credenciales para el siguiente destino \"[host]:25\", Postfix <b>siempre</b> busca \"host\" antes de buscar \"[host]:25\". Este comportamiento hace que sea imposible utilizar \"host\" y \"[host]:25\" al mismo tiempo.",
@@ -436,7 +436,9 @@
         "hibp_nok": "¡Se encontró coincidencia - esta es una contraseña <b>no segura</b>, selecciona otra!",
         "hibp_ok": "No se encontraron coincidencias",
         "loading": "Espera por favor...",
-        "restart_now": "Reiniciar ahora"
+        "restart_now": "Reiniciar ahora",
+        "restart_sogo": "Reiniciar SOGo",
+        "restart_sogo_info": "Algunas tareas, por ejemplo agregar un dominio, requieren que se reinicie SOGo para detectar cambios hechos en la UI de FeldHost™ Mailhosting.<br><br><b>Importante:</b> Un reinicio sencillo puede tardar un poco en completarse, por favor espera a que termine."
     },
     "header": {
         "administration": "Administración",
@@ -617,7 +619,7 @@
     "start": {
         "help": "Mostrar/Ocultar panel de ayuda",
         "imap_smtp_server_auth_info": "Por favor utiliza tu dirección de correo completa y el mecanismo de autenticación PLAIN.<br>\r\nTus datos para iniciar sesión serán cifrados por el cifrado obligatorio del servidor",
-        "mailcow_apps_detail": "Utiliza una aplicación de mailcow para acceder a tus correos, calendario, contactos y más.",
+        "mailcow_apps_detail": "Utiliza una aplicación de para acceder a tus correos, calendario, contactos y más.",
         "mailcow_panel_detail": "<b>Administradores por dominio</b> pueden crear, modificar o eliminar buzones y alias, modificar los dominios asignados y ver información más detallada sobre los dominios asignados<br>\r\n\t<b>Usuarios de buzón</b> son capaces de crear alias de tiempo limitado (spam alias), cambiar su contraseña y la configuración del filtro de spam del buzón."
     },
     "success": {

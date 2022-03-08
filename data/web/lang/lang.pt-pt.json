@@ -52,7 +52,7 @@
         "password_repeat": "Confirmar senha (repetir)",
         "r_active": "Restrictions Ativos",
         "r_inactive": "Restrictions Inativos",
-        "r_info": "Greyed out/disabled elements on the list of active restrictions are not known as valid restrictions to mailcow and cannot be moved. Unknown restrictions will be set in order of appearance anyway. <br>You can add new elements in <code>inc/vars.local.inc.php</code> to be able to toggle them.",
+        "r_info": "Greyed out/disabled elements on the list of active restrictions are not known as valid restrictions to FeldHost™ Mailhosting and cannot be moved. Unknown restrictions will be set in order of appearance anyway. <br>You can add new elements in <code>inc/vars.local.inc.php</code> to be able to toggle them.",
         "remove": "Remover",
         "save": "Salvar",
         "search_domain_da": "Selecione o(s) domínio(s)",
@@ -198,7 +198,7 @@
     "start": {
         "help": "Mostrar/Ocultar painel de ajuda",
         "imap_smtp_server_auth_info": "Utilize o endereço de email completo com o método de autentucação PLAIN.<br>\r\nOs dados de login serão encryptados pelo servidor.",
-        "mailcow_apps_detail": "Use um mailcow app para acessar seus emails, calendário, contatos e outras informações.",
+        "mailcow_apps_detail": "Use um app para acessar seus emails, calendário, contatos e outras informações.",
         "mailcow_panel_detail": "<b>Administradores:</b> podem criar, alterar ou apagar contas e apelidos , alterar domínios e outras informações de seus domínios atribuídos.<br>\r\n\t<b>Usuários:</b> podem criar apelidos por tempo determinado , alterar senha e configuração do nível do filtro de spam."
     },
     "success": {

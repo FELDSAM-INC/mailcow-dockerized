@@ -8,7 +8,7 @@
         "active": "Aktywny",
         "add": "Dodaj",
         "alias_address": "Alias/y:",
-        "alias_address_info": "<small>Pełny/e adres/y email lub @example.com, aby przejąć wszystkie wiadomości dla domeny (oddzielone przecinkami). <b>tylko domeny mailcow</b>.</small>",
+        "alias_address_info": "<small>Pełny/e adres/y email lub @example.com, aby przejąć wszystkie wiadomości dla domeny (oddzielone przecinkami). <b>tylko domeny FeldHost™ Mailhosting</b>.</small>",
         "alias_domain": "Alias domeny",
         "alias_domain_info": "<small>Tylko prawidłowe nazwy domen (oddzielone przecinkami).</small>",
         "backup_mx_options": "Opcje Backup MX:",
@@ -75,7 +75,7 @@
         "filter_table": "Tabela filtru",
         "forwarding_hosts": "Hosty przekazujące",
         "forwarding_hosts_add_hint": "Możesz albo wyszczególnić adresy IPv4/IPv6, sieci w notacji CIDR, nazwy hostów (które zostaną rozłożone na adresy IP), albo nazwy domen (które zostaną rozłożone na adresy IP poprzez sprawdzanie rekordów SPF lub, w razie ich braku, rekordów MX).",
-        "forwarding_hosts_hint": "Wiadomości przychodzące od hostów wyszczególnionych tutaj są akceptowane bezwarunkowo. Dane hosty nie są następnie sprawdzane względem list DNSBL lub poddawane metodzie szarych list. Otrzymany od nich spam nie jest nigdy odrzucany, ale opcjonalnie może zostać umieszczony w folderze spam. Najpopularniejsze zastosowanie dla takiego rozwiązania to wyszczególnienie serwerów poczty, na których ustawiono przekierowanie poczty przychodzącej na Twój serwer Mailcow.",
+        "forwarding_hosts_hint": "Wiadomości przychodzące od hostów wyszczególnionych tutaj są akceptowane bezwarunkowo. Dane hosty nie są następnie sprawdzane względem list DNSBL lub poddawane metodzie szarych list. Otrzymany od nich spam nie jest nigdy odrzucany, ale opcjonalnie może zostać umieszczony w folderze spam. Najpopularniejsze zastosowanie dla takiego rozwiązania to wyszczególnienie serwerów poczty, na których ustawiono przekierowanie poczty przychodzącej na Twój serwer FeldHost™  Mailhosting.",
         "host": "Host",
         "import": "Importuj",
         "import_private_key": "Importuj klucz prywatny",
@@ -90,7 +90,7 @@
         "quarantine": "Kwarantanna",
         "r_active": "Aktywne ograniczenia",
         "r_inactive": "Nieaktywne ograniczenia",
-        "r_info": "Zablokowane/Wyłączone elementy na liście aktywnych ograniczeń nie są rozpoznawane przez mailcow jako prawidłowe ograniczenia i nie można ich przesunąć. Niemniej jednak nierozpoznane ograniczenia zostaną wyświetlone w kolejności pojawiania się. <br>Nowe elementy można dodać w <code>inc/vars.local.inc.php</code>, aby móc je przełączać.",
+        "r_info": "Zablokowane/Wyłączone elementy na liście aktywnych ograniczeń nie są rozpoznawane przez FeldHost™ Mailhosting jako prawidłowe ograniczenia i nie można ich przesunąć. Niemniej jednak nierozpoznane ograniczenia zostaną wyświetlone w kolejności pojawiania się. <br>Nowe elementy można dodać w <code>inc/vars.local.inc.php</code>, aby móc je przełączać.",
         "refresh": "Odśwież",
         "remove": "Usuń",
         "save": "Zapisz zmiany",
@@ -198,7 +198,9 @@
         "delete_now": "Usuń teraz",
         "delete_these_items": "Czy jesteś pewien, że chcesz usunąć następujące elementy?",
         "loading": "Proszę czekać...",
-        "restart_now": "Uruchom ponownie teraz"
+        "restart_now": "Uruchom ponownie teraz",
+        "restart_sogo": "Uruchom ponownie SOGo",
+        "restart_sogo_info": "Niektóre zadania, np. dodanie domeny, wymagają ponownego uruchomienia SOGo, aby zastosować zmiany wprowadzone do FeldHost™  Mailhosting UI.<br><br><b>Important:</b> Bezpieczne, ponowne uruchomienie może chwilę potrwać, proszę czekać do zakończenia procesu."
     },
     "header": {
         "administration": "Administrowanie",
@@ -291,7 +293,7 @@
     "start": {
         "help": "Pokaż/Ukryj panel pomocy",
         "imap_smtp_server_auth_info": "Proszę korzystać z pełnego adresu email i mechanizmu uwierzytelniania PLAIN.<br>\r\nTwoje dane logowania zostaną zaszyfrowane przez obowiązkowe szyfrowanie po stronie serwera.",
-        "mailcow_apps_detail": "Użyj aplikacji mailcow, aby mieć dostęp do wiadomości, kalendarza, kontaktów i innych.",
+        "mailcow_apps_detail": "Użyj aplikacji, aby mieć dostęp do wiadomości, kalendarza, kontaktów i innych.",
         "mailcow_panel_detail": "<b>Administratorzy domeny</b> tworzą, modyfikują lub usuwają skrzynki i aliasy, zmieniają domeny i czytają dalsze informacje o przypisanych im domenach.<br>\r\n\t<b>Użytkownicy skrzynek</b> mogą tworzyć ograniczone czasowo aliasy (aliasy spam), zmieniać swoje hasła i ustawienia filtru spam."
     },
     "success": {
