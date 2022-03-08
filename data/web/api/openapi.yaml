@@ -1,13 +1,13 @@
 openapi: 3.0.0
 info:
   description: >-
-    mailcow is complete e-mailing solution with advanced antispam, antivirus,
+    FeldHost™ Mailhosting is complete e-mailing solution with advanced antispam, antivirus,
     nice UI and API.
 
 
     In order to use this API you have to create a API key and add your IP
     address to the whitelist of allowed IPs this can be done by logging into the
-    Mailcow UI using your admin account, then go to Configuration > Access >
+    FeldHost™ Mailhosting UI using your admin account, then go to Configuration > Access >
     Edit administrator details > API. There you will find a collapsed API menu.
 
 
@@ -15,7 +15,7 @@ info:
       - The read only key can only be used for all get endpoints
       - The read write key can be used for all endpoints
 
-  title: mailcow API
+  title: FeldHost™ Mailhosting API
   version: "1.0.0"
 
 servers:
@@ -209,7 +209,7 @@ paths:
                         - app_passwd
                         - add
                         - active: "1"
-                          username: info@domain.tld
+                          username: info@feldhost.cz
                           app_name: wordpress
                           app_passwd: keyleudecticidechothistishownsan31
                           app_passwd2: keyleudecticidechothistishownsan31
@@ -297,7 +297,7 @@ paths:
                         - add
                         - active: "1"
                           bcc_dest: bcc@awesomecow.tld
-                          local_dest: mailcow.tld
+                          local_dest: feldhost.tld
                           type: sender
                         - null
                       msg: bcc_saved
@@ -333,7 +333,7 @@ paths:
               example:
                 active: "1"
                 bcc_dest: bcc@awesomecow.tld
-                local_dest: mailcow.tld
+                local_dest: feldhost.tld
                 type: sender
               properties:
                 active:
@@ -399,7 +399,7 @@ paths:
             schema:
               example:
                 dkim_selector: dkim
-                domains: mailcow.tld
+                domains: feldhost.tld
                 key_size: "2048"
               properties:
                 dkim_selector:
@@ -427,11 +427,11 @@ paths:
                     - log:
                         - dkim
                         - duplicate
-                        - from_domain: mailcow.tld
+                        - from_domain: feldhost.tld
                           to_domain: awesomecow.tld
                       msg:
                         - dkim_duplicated
-                        - mailcow.tld
+                        - feldhost.tld
                         - awesomecow.tld
                       type: success
               schema:
@@ -461,7 +461,7 @@ paths:
           application/json:
             schema:
               example:
-                from_domain: mailcow.tld
+                from_domain: feldhost.tld
                 to_domain: awesomecow.tld
               properties:
                 fron_domain:
@@ -638,7 +638,7 @@ paths:
                         - domain_admin
                         - add
                         - active: "1"
-                          domains: mailcow.tld
+                          domains: feldhost.tld
                           password: "*"
                           password2: "*"
                           username: testadmin
@@ -677,7 +677,7 @@ paths:
             schema:
               example:
                 active: "1"
-                domains: mailcow.tld
+                domains: feldhost.tld
                 password: supersecurepw
                 password2: supersecurepw
                 username: testadmin
@@ -970,7 +970,7 @@ paths:
                         - fwdhost
                         - add
                         - filter_spam: "0"
-                          hostname: hosted.mailcow.de
+                          hostname: hosted.feldhost.cz
                       msg:
                         - forwarding_host_added
                         - "5.1.76.202, 2a00:f820:417::202"
@@ -996,7 +996,7 @@ paths:
       tags:
         - Fordwarding Hosts
       description: >-
-        Add a new Forwarding host to mailcow. You can chose to enable or disable
+        Add a new Forwarding host to FeldHost™ Mailhosting. You can chose to enable or disable
         spam filtering of incoming emails by specifing `filter_spam` 0 =
         inactive, 1 = active.
       operationId: Add Forward Host
@@ -1006,7 +1006,7 @@ paths:
             schema:
               example:
                 filter_spam: "0"
-                hostname: hosted.mailcow.de
+                hostname: hosted.feldhost.cz
               properties:
                 filter_spam:
                   description: "1 to enable spam filter, 0 to disable spam filter"
@@ -1136,7 +1136,7 @@ paths:
                         - oauth2
                         - add
                         - client
-                        - redirect_uri: "https://mailcow.tld"
+                        - redirect_uri: "https://feldhost.tld"
                       msg: Added client access
                       type: success
               schema:
@@ -1166,7 +1166,7 @@ paths:
           application/json:
             schema:
               example:
-                redirect_uri: "https://mailcow.tld"
+                redirect_uri: "https://feldhost.tld"
               properties:
                 redirect_uri:
                   description: the uri where you should be redirected after oAuth
@@ -1188,12 +1188,12 @@ paths:
                         - recipient_map
                         - add
                         - active: "1"
-                          recipient_map_new: target@mailcow.tld
-                          recipient_map_old: recipient@mailcow.tld
+                          recipient_map_new: target@feldhost.tld
+                          recipient_map_old: recipient@feldhost.tld
                         - null
                       msg:
                         - recipient_map_entry_saved
-                        - recipient@mailcow.tld
+                        - recipient@feldhost.tld
                       type: success
               schema:
                 properties:
@@ -1225,8 +1225,8 @@ paths:
             schema:
               example:
                 active: "1"
-                recipient_map_new: target@mailcow.tld
-                recipient_map_old: recipient@mailcow.tld
+                recipient_map_new: target@feldhost.tld
+                recipient_map_old: recipient@feldhost.tld
               properties:
                 active:
                   description: 1 for a active user account 0 for a disabled user account
@@ -1253,7 +1253,7 @@ paths:
                     - log:
                         - relayhost
                         - add
-                        - hostname: "mailcow.tld:25"
+                        - hostname: "feldhost.tld:25"
                           password: supersecurepassword
                           username: testuser
                       msg:
@@ -1287,7 +1287,7 @@ paths:
           application/json:
             schema:
               example:
-                hostname: "mailcow.tld:25"
+                hostname: "feldhost.tld:25"
                 password: supersecurepassword
                 username: testuser
               properties:
@@ -1319,7 +1319,7 @@ paths:
                         - resource
                         - active: "1"
                           description: test
-                          domain: mailcow.tld
+                          domain: feldhost.tld
                           kind: location
                           multiple_bookings: "0"
                           multiple_bookings_custom: ""
@@ -1327,7 +1327,7 @@ paths:
                         - null
                       msg:
                         - resource_added
-                        - mailcow.tld
+                        - feldhost.tld
                       type: success
               schema:
                 properties:
@@ -1358,7 +1358,7 @@ paths:
               example:
                 active: "1"
                 description: test
-                domain: mailcow.tld
+                domain: feldhost.tld
                 kind: location
                 multiple_bookings: "0"
                 multiple_bookings_custom: ""
@@ -1468,10 +1468,10 @@ paths:
           application/json:
             schema:
               example:
-                username: lisa@mailcow.tld
-                host1: mail.mailcow.tld
+                username: lisa@feldhost.tld
+                host1: mail.feldhost.tld
                 port1: "143"
-                user1: demo@mailcow.tld
+                user1: demo@feldhost.tld
                 password1: supersecretpw
                 enc1: TLS
                 mins_interval: "20"
@@ -1491,7 +1491,7 @@ paths:
                 active: "1"
               properties:
                 parameters:
-                  description: your local mailcow mailbox
+                  description: your local FeldHost™ mailbox
                   type: string
                 host1:
                   description: the smtp server where mails should be synced from
@@ -1567,12 +1567,12 @@ paths:
                         - add
                         - parameters: ""
                           active: "1"
-                          dest: mailcow.tld
+                          dest: feldhost.tld
                           policy: encrypt
                         - null
                       msg:
                         - tls_policy_map_entry_saved
-                        - mailcow.tld
+                        - feldhost.tld
                       type: success
               schema:
                 properties:
@@ -1603,7 +1603,7 @@ paths:
               example:
                 parameters: ""
                 active: "1"
-                dest: mailcow.tld
+                dest: feldhost.tld
                 policy: encrypt
               properties:
                 parameters:
@@ -1894,10 +1894,10 @@ paths:
                         - dkim
                         - delete
                         - domains:
-                            - mailcow.tld
+                            - feldhost.tld
                       msg:
                         - dkim_removed
-                        - mailcow.tld
+                        - feldhost.tld
                       type: success
               schema:
                 properties:
@@ -1927,7 +1927,7 @@ paths:
             schema:
               items:
                 example:
-                  - mailcow.tld
+                  - feldhost.tld
                 type: string
               type: array
       summary: Delete DKIM Key
@@ -2543,11 +2543,11 @@ paths:
                         - delete
                         - resource
                         - name:
-                            - test@mailcow.tld
+                            - test@feldhost.tld
                         - null
                       msg:
                         - resource_removed
-                        - test@mailcow.tld
+                        - test@feldhost.tld
                       type: success
               schema:
                 properties:
@@ -2578,7 +2578,7 @@ paths:
           application/json:
             schema:
               example:
-                - test@mailcow.tld
+                - test@feldhost.tld
               properties:
                 items:
                   description: contains list of Resources you want to delete
@@ -3149,7 +3149,7 @@ paths:
                   netban_ipv4: "24"
                   netban_ipv6: "64"
                   retry_window: "600"
-                  whitelist: mailcow.tld
+                  whitelist: feldhost.tld
                 items: none
               properties:
                 attr:
@@ -3825,13 +3825,13 @@ paths:
     get:
       parameters:
         - description: mailbox of entry you want to get
-          example: hello@mailcow.email
+          example: hello@feldhost.cz
           in: path
           name: mailbox
           required: true
           schema:
             enum:
-              - hello@mailcow.email
+              - hello@feldhost.cz
             type: string
         - description: e.g. api-key-string
           example: api-key-string
@@ -3851,9 +3851,9 @@ paths:
                   value:
                     - active: "1"
                       created: "2019-12-21 16:04:55"
-                      domain: mailcow.email
+                      domain: feldhost.cz
                       id: 2
-                      mailbox: hello@mailcow.email
+                      mailbox: hello@feldhost.cz
                       modified: null
                       name: emclient
           description: OK
@@ -3900,9 +3900,9 @@ paths:
                     - active: "1"
                       bcc_dest: bcc@awesomecow.tld
                       created: "2019-10-02 21:44:34"
-                      domain: mailcow.tld
+                      domain: feldhost.tld
                       id: 3
-                      local_dest: "@mailcow.tld"
+                      local_dest: "@feldhost.tld"
                       modified: null
                       type: sender
           description: OK
@@ -3967,11 +3967,11 @@ paths:
                     - active: "1"
                       created: "2019-10-02 10:29:41"
                       selected_domains:
-                        - mailcow.tld
+                        - feldhost.tld
                       tfa_active: "0"
                       unselected_domains:
-                        - awesomemailcow.de
-                        - mailcowisgreat.de
+                        - awesomefeldhost.cz
+                        - feldhostisgreat.de
                       username: testadmin
           description: OK
           headers: {}
@@ -3991,7 +3991,7 @@ paths:
           schema:
             enum:
               - all
-              - mailcow.tld
+              - feldhost.tld
             type: string
         - description: comma seperated list of tags to filter by
           example: "tag1,tag2"
@@ -4112,15 +4112,15 @@ paths:
                   value:
                     - host: 5.1.76.202
                       keep_spam: "yes"
-                      source: hosted.mailcow.de
+                      source: hosted.feldhost.cz
                     - host: "2a00:f820:417::202"
                       keep_spam: "yes"
-                      source: hosted.mailcow.de
+                      source: hosted.feldhost.cz
           description: OK
           headers: {}
       tags:
         - Fordwarding Hosts
-      description: You can list all Forwarding Hosts in your mailcow.
+      description: You can list all Forwarding Hosts in your FeldHost™ Mailhosting.
       operationId: Get Forwarding Hosts
       summary: Get Forwarding Hosts
   "/api/v1/get/logs/acme/{count}":
@@ -4235,7 +4235,7 @@ paths:
                       ua: >-
                         Microsoft Office/16.0 (Windows NT 6.2; MAPICPL
                         16.0.11328; Pro)
-                      user: awesome@mailcow.de
+                      user: awesome@feldhost.cz
           description: OK
           headers: {}
       tags:
@@ -4396,18 +4396,18 @@ paths:
               examples:
                 response:
                   value:
-                    - from: awesome@mailcow.email
-                      header_from: '"Awesome" <awesome@mailcow.email>'
-                      header_subject: Mailcow is amazing
+                    - from: awesome@feldhost.cz
+                      header_from: '"Awesome" <awesome@feldhost.cz>'
+                      header_subject: FeldHost™  Mailhosting is amazing
                       ip: 172.22.1.248
                       message_id: 6a-5d892500-7-240abd80@90879116
                       qid: E3CF91500458
-                      rcpt: hello@mailcow.email
+                      rcpt: hello@feldhost.cz
                       rl_hash: RLsdz3tuabozgd4oacbdh8kc78
                       rl_info: mailcow(RLsdz3tuabozgd4oacbdh8kc78)
                       rl_name: mailcow
                       time: 1569269003
-                      user: awesome@mailcow.email
+                      user: awesome@feldhost.cz
           description: OK
           headers: {}
       tags:
@@ -4623,7 +4623,7 @@ paths:
                       queue_name: incoming
                       recipients:
                         - recipient@awesomecow.tld
-                      sender: sender@mailcow.tld
+                      sender: sender@feldhost.tld
           description: OK
           headers: {}
       tags:
@@ -4667,7 +4667,7 @@ paths:
                       client_secret: 73fc668a88147e32a31ff80c
                       grant_types: null
                       id: 1
-                      redirect_uri: "https://mailcow.tld"
+                      redirect_uri: "https://feldhost.tld"
                       scope: profile
                       user_id: null
           description: OK
@@ -4765,7 +4765,7 @@ paths:
                     rcpt: admin@domain.tld
                     score: 15.48
                     sender: bounces@send.domain.tld
-                    subject: mailcow is awesome
+                    subject: FeldHost™ is awesome
                     virus_flag: 0
           description: OK
           headers: {}
@@ -4810,8 +4810,8 @@ paths:
                       created: "2019-10-02 22:06:29"
                       id: 3
                       modified: null
-                      recipient_map_new: target@mailcow.tld
-                      recipient_map_old: recipient@mailcow.tld
+                      recipient_map_new: target@feldhost.tld
+                      recipient_map_old: recipient@feldhost.tld
           description: OK
           headers: {}
       tags:
@@ -4852,7 +4852,7 @@ paths:
                 response:
                   value:
                     - active: "1"
-                      hostname: "mailcow.tld:25"
+                      hostname: "feldhost.tld:25"
                       id: 1
                       password: supersecurepassword
                       password_short: tes...
@@ -4878,11 +4878,11 @@ paths:
                   value:
                     - active: "1"
                       description: test
-                      domain: mailcow.tld
+                      domain: feldhost.tld
                       kind: location
                       local_part: test
                       multiple_bookings: 0
-                      name: test@mailcow.tld
+                      name: test@feldhost.tld
           description: OK
           headers: {}
       tags:
@@ -4916,10 +4916,10 @@ paths:
                 response:
                   value:
                     - frame: s
-                      mailbox: leon@mailcow.tld
+                      mailbox: leon@feldhost.tld
                       value: "5"
                     - frame: s
-                      mailbox: lisa@mailcow.tld
+                      mailbox: lisa@feldhost.tld
                       value: "3"
           description: OK
           headers: {}
@@ -5393,7 +5393,7 @@ paths:
                     - parameters: ""
                       active: "1"
                       created: "2019-10-03 08:42:12"
-                      dest: mailcow.tld
+                      dest: feldhost.tld
                       id: 1
                       modified: null
                       policy: encrypt
@@ -5575,7 +5575,7 @@ tags:
   - name: Fordwarding Hosts
     description: Forwarding Hosts enable you to send mail using a relay
   - name: Logs
-    description: Get all mailcow system logs
+    description: Get all FeldHost™ Mailhosting system logs
   - name: Queue Manager
     description: Manage the postfix mail queue
   - name: Quarantine
@@ -5591,7 +5591,7 @@ tags:
   - name: Outgoing TLS Policy Map Overrides
     description: Force global TLS policys
   - name: oAuth Clients
-    description: Use mailcow as a oAuth server
+    description: Use FeldHost™ Mailhosting as a oAuth server
   - name: Routing
     description: Define your own email routes
   - name: Resources
