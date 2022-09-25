@@ -46,6 +46,8 @@ Originated from @andryyy (André)
 ```
 yum install docker-engine docker-compose git
 docker-storage-config -s overlay2 -d /dev/sdb
+curl -#L https://github.com/docker/compose/releases/download/v2.11.1/docker-compose-$(uname -s)-$(uname -m) > /usr/bin/docker-compose
+chmod +x /usr/bin/docker-compose
 ```
 
 `# nano /etc/docker/daemon.json`
