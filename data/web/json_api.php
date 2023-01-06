@@ -15,7 +15,7 @@ function api_log($_data) {
       continue;
     }
 
-    $value = json_decode($value, true);     
+    $value = json_decode($value, true);
     if ($value) {
       if (is_array($value)) unset($value["csrf_token"]);
       foreach ($value as $key => &$val) {
@@ -23,7 +23,7 @@ function api_log($_data) {
           $val = '*';
         }
       }
-      $value = json_encode($value);  
+      $value = json_encode($value);
     }
     $data_var[] = $data . "='" . $value . "'";
   }
@@ -44,7 +44,7 @@ function api_log($_data) {
       'msg' => 'Redis: '.$e
     );
     return false;
-  }     
+  }
 }
 
 if (isset($_GET['query'])) {
@@ -178,12 +178,12 @@ if (isset($_GET['query'])) {
               // parse post data
               $post = trim(file_get_contents('php://input'));
               if ($post) $post = json_decode($post);
-              
+
               // process registration data from authenticator
               try {
                 // decode base64 strings
                 $clientDataJSON = base64_decode($post->clientDataJSON);
-                $attestationObject = base64_decode($post->attestationObject);   
+                $attestationObject = base64_decode($post->attestationObject);
 
                 // processCreate($clientDataJSON, $attestationObject, $challenge, $requireUserVerification=false, $requireUserPresent=true, $failIfRootMismatch=true)
                 $data = $WebAuthn->processCreate($clientDataJSON, $attestationObject, $_SESSION['challenge'], false, true);
@@ -273,6 +273,18 @@ if (isset($_GET['query'])) {
         break;
         case "domain-admin":
           process_add_return(domain_admin('add', $attr));
+        break;
+        case "sso":
+          switch ($object) {
+            case "domain-admin":
+              $data = domain_admin_sso('issue', $attr);
+              if($data) {
+                echo json_encode($data);
+                exit(0);
+              }
+              process_add_return($data);
+            break;
+          }
         break;
         case "admin":
           process_add_return(admin('add', $attr));
@@ -444,7 +456,7 @@ if (isset($_GET['query'])) {
               //        false, if only internal is allowed
               //        null, if internal and cross-platform is allowed
               $createArgs = $WebAuthn->getCreateArgs($_SESSION["mailcow_cc_username"], $_SESSION["mailcow_cc_username"], $_SESSION["mailcow_cc_username"], 30, false, $GLOBALS['WEBAUTHN_UV_FLAG_REGISTER'], null, $excludeCredentialIds);
-              
+
               print(json_encode($createArgs));
               $_SESSION['challenge'] = $WebAuthn->getChallenge();
               return;
@@ -499,7 +511,7 @@ if (isset($_GET['query'])) {
             switch ($object) {
               case "all":
                 $tags = null;
-                if (isset($_GET['tags']) && $_GET['tags'] != '') 
+                if (isset($_GET['tags']) && $_GET['tags'] != '')
                   $tags = explode(',', $_GET['tags']);
 
                 $domains = mailbox('get', 'domains', null, $tags);
@@ -970,7 +982,7 @@ if (isset($_GET['query'])) {
               case "all":
               case "reduced":
                 $tags = null;
-                if (isset($_GET['tags']) && $_GET['tags'] != '') 
+                if (isset($_GET['tags']) && $_GET['tags'] != '')
                   $tags = explode(',', $_GET['tags']);
 
                 if (empty($extra)) $domains = mailbox('get', 'domains');
@@ -995,7 +1007,7 @@ if (isset($_GET['query'])) {
 
               default:
                 $tags = null;
-                if (isset($_GET['tags']) && $_GET['tags'] != '') 
+                if (isset($_GET['tags']) && $_GET['tags'] != '')
                   $tags = explode(',', $_GET['tags']);
 
                 if ($tags === null) {
@@ -1005,7 +1017,7 @@ if (isset($_GET['query'])) {
                   $mailboxes = mailbox('get', 'mailboxes', $object, $tags);
                   if (is_array($mailboxes)) {
                     foreach ($mailboxes as $mailbox) {
-                      if ($details = mailbox('get', 'mailbox_details', $mailbox)) 
+                      if ($details = mailbox('get', 'mailbox_details', $mailbox))
                         $data[] = $details;
                     }
                   }
