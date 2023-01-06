@@ -433,7 +433,7 @@
         "hibp_nok": "¡Se encontró coincidencia - esta es una contraseña <b>no segura</b>, selecciona otra!",
         "hibp_ok": "No se encontraron coincidencias",
         "loading": "Espera por favor...",
-        "restart_now": "Reiniciar ahora"
+        "restart_now": "Reiniciar ahora",
         "restart_sogo": "Reiniciar SOGo",
         "restart_sogo_info": "Algunas tareas, por ejemplo agregar un dominio, requieren que se reinicie SOGo para detectar cambios hechos en la UI de FeldHost™ Mailhosting.<br><br><b>Importante:</b> Un reinicio sencillo puede tardar un poco en completarse, por favor espera a que termine."
     },
