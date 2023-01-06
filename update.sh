@@ -890,9 +890,9 @@ if [ -f "data/conf/rspamd/local.d/metrics.conf" ]; then
 fi
 
 # Set app_info.inc.php
-if [ ${BRANCH} == "master" ]; then
+if [[ ${BRANCH} == "master" ]] || [[ ${BRANCH} == feldhost* ]]; then
   mailcow_git_version=$(git describe --tags `git rev-list --tags --max-count=1`)
-elif [ ${BRANCH} == "nightly" ]; then
+elif [[ ${BRANCH} == "nightly" ]]; then
   mailcow_git_version=$(git rev-parse --short $(git rev-parse @{upstream}))
   mailcow_last_git_version=""
 else
