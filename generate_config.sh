@@ -183,39 +183,7 @@ else
   SKIP_SOLR=n
 fi
 
-if [[ ${SKIP_BRANCH} != y ]]; then
-  echo "Which branch of mailcow do you want to use?"
-  echo ""
-  echo "Available Branches:"
-  echo "- master branch (stable updates) | default, recommended [1]"
-  echo "- nightly branch (unstable updates, testing) | not-production ready [2]"
-  sleep 1
-
-  while [ -z "${MAILCOW_BRANCH}" ]; do
-    read -r -p  "Choose the Branch with it´s number [1/2] " branch
-    case $branch in
-      [2])
-        MAILCOW_BRANCH="nightly"
-        ;;
-      *)
-        MAILCOW_BRANCH="master"
-      ;;
-    esac
-  done
-
-  git fetch --all
-  git checkout -f $MAILCOW_BRANCH
-
-elif [[ ${SKIP_BRANCH} == y ]]; then
-  echo -e "\033[33mEnabled Dev Mode.\033[0m"
-  echo -e "\033[33mNot checking out a different branch!\033[0m"
-  MAILCOW_BRANCH=$(git rev-parse --short $(git rev-parse @{upstream}))
-
-else
-  echo -e "\033[31mCould not determine branch input..."
-  echo -e "\033[31mExiting."
-  exit 1
-fi  
+MAILCOW_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 if [ ! -z "${MAILCOW_BRANCH}" ]; then
   git_branch=${MAILCOW_BRANCH}
