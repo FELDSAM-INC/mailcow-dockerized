@@ -33,7 +33,7 @@ if docker compose > /dev/null 2>&1; then
       sleep 2
       echo -e "\e[33mNotice: You´ll have to update this Compose Version via your Package Manager manually!\e[0m"
     else
-      echo -e "\e[31mCannot find Docker Compose with a Version Higher than 2.X.X.\e[0m" 
+      echo -e "\e[31mCannot find Docker Compose with a Version Higher than 2.X.X.\e[0m"
       echo -e "\e[31mPlease update/install it manually regarding to this doc site: https://mailcow.github.io/mailcow-dockerized-docs/i_u_m/i_u_m_install/\e[0m"
       exit 1
     fi
@@ -46,18 +46,18 @@ elif docker-compose > /dev/null 2>&1; then
       sleep 2
       echo -e "\e[33mNotice: For an automatic update of docker-compose please use the update_compose.sh scripts located at the helper-scripts folder.\e[0m"
     else
-      echo -e "\e[31mCannot find Docker Compose with a Version Higher than 2.X.X.\e[0m" 
+      echo -e "\e[31mCannot find Docker Compose with a Version Higher than 2.X.X.\e[0m"
       echo -e "\e[31mPlease update/install manually regarding to this doc site: https://mailcow.github.io/mailcow-dockerized-docs/i_u_m/i_u_m_install/\e[0m"
       exit 1
     fi
   fi
 
 else
-  echo -e "\e[31mCannot find Docker Compose.\e[0m" 
+  echo -e "\e[31mCannot find Docker Compose.\e[0m"
   echo -e "\e[31mPlease install it regarding to this doc site: https://mailcow.github.io/mailcow-dockerized-docs/i_u_m/i_u_m_install/\e[0m"
   exit 1
 fi
-    
+
 
 if [ -f mailcow.conf ]; then
   read -r -p "A config file exists and will be overwritten, are you sure you want to continue? [y/N] " response
@@ -135,31 +135,11 @@ else
   SKIP_SOLR=n
 fi
 
-echo "Which branch of mailcow do you want to use?"
-echo ""
-echo "Available Branches:"
-echo "- master branch (stable updates) | default, recommended [1]"
-echo "- nightly branch (unstable updates, testing) | not-production ready [2]"
-sleep 1
-
-while [ -z "${MAILCOW_BRANCH}" ]; do
-  read -r -p  "Choose the Branch with it´s number [1/2] " branch
-  case $branch in
-    [2])
-      MAILCOW_BRANCH="nightly"
-      ;;
-    *)
-      MAILCOW_BRANCH="master"
-    ;;
-  esac
-done
+MAILCOW_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 if [ ! -z "${MAILCOW_BRANCH}" ]; then
   git_branch=${MAILCOW_BRANCH}
 fi
-
-git fetch --all
-git checkout -f $git_branch
 
 [ ! -f ./data/conf/rspamd/override.d/worker-controller-password.inc ] && echo '# Placeholder' > ./data/conf/rspamd/override.d/worker-controller-password.inc
 
