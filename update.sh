@@ -817,8 +817,14 @@ if [[ ${USE_REBASE} == "y" ]]; then
   git reset HEAD update.sh
   git checkout update.sh
   git checkout data/conf/postfix/main.cf
-  git checkout docker-compose.sh
+  git checkout docker-compose.yml
   git pull --rebase
+
+  # remove ipv6 container
+  if grep -qi "ip6tables\":true" /etc/docker/daemon.json; then
+    sed -i '/ipv6nat-mailcow:$/,/^$/d' docker-compose.yml
+  fi
+
   REBASE_RETURN=$?
   if [[ ${REBASE_RETURN} != 0 ]]; then
     echo -e "\e[31m\nOh no, something went wrong. Please check the error message above.\e[0m"
