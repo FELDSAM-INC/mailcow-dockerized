@@ -816,6 +816,7 @@ if [[ ${USE_REBASE} == "y" ]]; then
   # reset update.sh back before pull with rebase
   git reset HEAD update.sh
   git checkout update.sh
+  git checkout data/conf/postfix/main.cf
   git pull --rebase
   REBASE_RETURN=$?
   if [[ ${REBASE_RETURN} != 0 ]]; then
