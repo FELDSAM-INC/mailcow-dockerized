@@ -817,6 +817,7 @@ if [[ ${USE_REBASE} == "y" ]]; then
   git reset HEAD update.sh
   git checkout update.sh
   git checkout data/conf/postfix/main.cf
+  git checkout docker-compose.sh
   git pull --rebase
   REBASE_RETURN=$?
   if [[ ${REBASE_RETURN} != 0 ]]; then
@@ -855,7 +856,7 @@ $COMPOSE_COMMAND pull
 
 # Fix missing SSL, does not overwrite existing files
 [[ ! -d data/assets/ssl ]] && mkdir -p data/assets/ssl
-cp -n -d data/assets/ssl-example/*.pem data/assets/ssl/
+cp -n -d data/assets/ssl-default/*.pem data/assets/ssl/
 
 echo -e "Checking IPv6 settings... "
 if grep -q 'SYSCTL_IPV6_DISABLED=1' mailcow.conf; then
